@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Engineering Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6c7b;
+      --accent: #1f5c45;
+      --accent-dark: #163f31;
+      --line: #ddd6cc;
+      --shadow: 0 12px 30px rgba(31, 41, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 244, 239, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 84px 0 60px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 28px 0 0;
+      font-size: 1.18rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      font-weight: 700;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 46px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .project {
+      background: var(--card);
+      border: 1px solid rgba(221, 214, 204, 0.8);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .project.featured {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      align-items: stretch;
+    }
+
+    .media {
+      background: #e9e3d8;
+      min-height: 260px;
+    }
+
+    .media iframe,
+    .media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      object-fit: cover;
+      border: 0;
+    }
+
+    .project-content {
+      padding: 30px;
+    }
+
+    .project h3 {
+      margin: 0 0 12px;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+    }
+
+    .project p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .note {
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent);
+      background: #f2eee7;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #edf4f0;
+      color: var(--accent-dark);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid rgba(221, 214, 204, 0.8);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      background: #e9e3d8;
+    }
+
+    .project-card .project-content {
+      padding: 24px;
+    }
+
+    .image-media {
+      padding: 0;
+    }
+
+    .project-gallery {
+      display: grid;
+      gap: 12px;
+      background: #e9e3d8;
+      padding: 12px;
+      min-height: 100%;
+      align-content: center;
+    }
+
+    .image-link {
+      display: block;
+      border-radius: 16px;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .image-link::after {
+      content: "Click to enlarge";
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(31, 41, 51, 0.72);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .image-link:hover::after {
+      opacity: 1;
+    }
+
+    .project-gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 16px;
+      background: #f7f4ef;
+      box-shadow: 0 6px 18px rgba(31, 41, 51, 0.08);
+    }
+
+    .arm-gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .arm-gallery .image-link:first-child img {
+      max-height: 360px;
+    }
+
+    .arm-gallery .image-link:last-child img {
+      max-height: 260px;
+    }
+
+    .satellite-gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .satellite-gallery img {
+      max-height: 300px;
+    }
+
+    .metal-gallery {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .metal-gallery img {
+      max-height: 300px;
+    }
+
+    .metal-gallery .image-link:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+
+    .metal-gallery .image-link:nth-child(3) img {
+      max-height: 260px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .skill-box {
+      background: var(--card);
+      border: 1px solid rgba(221, 214, 204, 0.8);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .skill-box h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .skill-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact-card {
+      background: var(--accent-dark);
+      color: #fff;
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact-card p {
+      color: rgba(255,255,255,0.78);
+      max-width: 620px;
+      margin: 10px 0 0;
+    }
+
+    .contact-card .button {
+      border-color: #fff;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .project.featured {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid,
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .metal-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .metal-gallery .image-link:nth-child(3) {
+        grid-column: auto;
+      }
+
+      .section-heading,
+      .contact-card {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      header {
+        position: static;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 56px 0 36px;
+      }
+
+      .project-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-content,
+      .contact-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Engineering Portfolio</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Manufacturing • Automation • Repeatability</div>
+        <h1>Making production cleaner, more repeatable, and easier to run.</h1>
+        <p>
+          I’m a manufacturing engineer focused on making production processes more repeatable, efficient,
+          and easier to run. This portfolio highlights projects involving automation, assembly, tooling,
+          testing, documentation, and hands-on manufacturing problem solving.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">View Projects</a>
+          <a class="button secondary" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Featured Work</div>
+            <h2>Projects that show the work.</h2>
+          </div>
+        </div>
+
+        <div class="featured-grid">
+          <article class="project featured">
+            <div class="media">
+              <iframe src="https://www.youtube-nocookie.com/embed/JnMgSkSAuSM" title="Representative FANUC robotic deburring video" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="project-content">
+              <h3>Pratt & Whitney — Robotic Deburring Cell</h3>
+              <div class="note">Representative FANUC deburring video shown because actual cell footage and parts are ITAR-controlled.</div>
+              <p>
+                I currently support seven robotic deburring cells used in aerospace manufacturing. My work includes supporting FANUC robots,
+                improving robotic deburring paths for complex part shapes, optimizing cycle time, and helping make the process more repeatable.
+              </p>
+              <p>
+                I also work on improvements around end-of-arm tooling, process parameters, and how parts are delivered into the cell. Also, a big part
+                of my role is making clear work instructions so operators can run the process consistently.
+              </p>
+              <div class="tags">
+                <span class="tag">FANUC Robots</span>
+                <span class="tag">Robotic Deburring</span>
+                <span class="tag">Cycle Time</span>
+                <span class="tag">Work Instructions</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project featured">
+            <div class="media">
+              <iframe src="https://www.youtube-nocookie.com/embed/kY6v7vYRTqU" title="RoboDK assembly simulation" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="project-content">
+              <h3>RoboDK — Robotic Simulations</h3>
+              <p>
+                I have been building my skills in RoboDK to better understand robotic simulation, offline programming, and automation planning.
+                My recent training has focused on simulating practical manufacturing applications like part assembly and machine tending.
+              </p>
+              
+              <div class="hero-actions" style="margin-top: 18px;">
+                <a class="button secondary" href="https://youtu.be/BNLMI-n2i2o" target="_blank" rel="noopener">Watch: Machine Tending Simulation</a>
+              </div>
+              <div class="tags">
+                <span class="tag">RoboDK</span>
+                <span class="tag">Offline Programming</span>
+                <span class="tag">Machine Tending</span>
+                <span class="tag">Robot Simulation</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project featured">
+            <div class="media">
+              <iframe src="https://www.youtube-nocookie.com/embed/ibJn9wlAhgg" title="Tennibot in action" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="project-content">
+              <h3>Tennibot — Manufacturing Engineer</h3>
+              <p>
+                At Tennibot, I supported the manufacturing and assembly of the Tennibot Rover, an autonomous robot designed to collect tennis balls.
+                My work focused on making the assembly process more repeatable, quicker, and easier to confirm quality through testing.
+              </p>
+              <p>
+                I created work instructions for subassemblies, designed assembly jigs in SolidWorks, built testing fixtures, and wrote Python programs
+                to test sensor subassemblies. This role gave me hands-on experience with the full manufacturing process, from design support to assembly,
+                testing, troubleshooting, and documentation.
+              </p>
+              <div class="tags">
+                <span class="tag">SolidWorks</span>
+                <span class="tag">Assembly Jigs</span>
+                <span class="tag">Python Testing</span>
+                <span class="tag">Manufacturing Engineering</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Additional Projects</div>
+            <h2>Design, documentation, and manufacturability.</h2>
+          </div>
+        </div>
+
+        <div class="featured-grid">
+          <article class="project featured">
+            <div class="media image-media">
+              <div class="project-gallery arm-gallery">
+                <a href="full-rm.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="full-rm.jpg" alt="Tennibot collection arm full view">
+                </a>
+                <a href="internal-view.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="internal-view.jpg" alt="Tennibot collection arm internal view">
+                </a>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Tennibot — Mechanical Design</h3>
+              <p>
+                I worked on updating the design of the Tennibot Rover’s collection arm. The goal was to create an arm that could collect tennis balls
+                along the net and chain-link fence while also being simple enough to manufacture and assemble.
+              </p>
+              <p>
+                The project involved balancing performance, sensor feedback, and manufacturability. It was a good example of designing a part that had
+                to work in the real world.
+              </p>
+              <div class="tags">
+                <span class="tag">Mechanical Design</span>
+                <span class="tag">CAD</span>
+                <span class="tag">Design for Manufacturability</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project featured">
+            <div class="media image-media">
+              <div class="project-gallery satellite-gallery">
+                <a href="satellite.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="satellite.jpg" alt="Auburn University small satellite">
+                </a>
+                <a href="satellite-internals.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="satellite-internals.jpg" alt="Auburn University small satellite internal assembly">
+                </a>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Auburn University Small Satellite Program</h3>
+              <p>
+                I was part of Auburn University’s Small Satellite Program, where my role was to help model the satellite assembly, maintain the CAD structure,
+                and document design changes as the project developed.
+              </p>
+              <p>
+                This required communicating with project teams, team leads, and sponsors to make sure the model stayed accurate and useful through reviews,
+                documentation, and project milestones.
+              </p>
+              <div class="tags">
+                <span class="tag">CAD Assembly</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Team Collaboration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project featured">
+            <div class="media image-media">
+              <div class="project-gallery metal-gallery">
+                <a href="aubie-before.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="aubie-before.jpg" alt="Aubie metal art before redesign">
+                </a>
+                <a href="aubie-after.jpg" class="image-link" target="_blank" rel="noopener">
+                  <img src="aubie-after.jpg" alt="Aubie metal art after layered redesign">
+                </a>
+                <a href="plasma-table.JPG" class="image-link" target="_blank" rel="noopener">
+                  <img src="plasma-table.JPG" alt="CNC plasma cutting table">
+                </a>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>Metal Shop Project</h3>
+              <p>
+                I helped a local metal art business improve the manufacturability of one of their Auburn themed products. The original design required detailed
+                hand painting, which made it difficult and time consuming to produce consistently.
+              </p>
+              <p>
+                I redesigned the product as a layered metal assembly so each layer could be cut, painted, and assembled more easily. I also created the 2D CAD files
+                used to cut the parts on a CNC plasma table.
+              </p>
+              <div class="tags">
+                <span class="tag">2D CAD</span>
+                <span class="tag">CNC Plasma</span>
+                <span class="tag">Design for Manufacturability</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Skills</div>
+            <h2>Where I like to work.</h2>
+          </div>
+          <p>Hands-on engineering work where design, manufacturing, automation, and troubleshooting come together.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-box">
+            <h3>Automation</h3>
+            <p>PLC-based FANUC robots, robotic deburring, RoboDK simulation, machine tending.</p>
+          </div>
+          <div class="skill-box">
+            <h3>Manufacturing Engineering</h3>
+            <p>Work instructions, process improvement, assembly support, testing fixtures, operator training, troubleshooting.</p>
+          </div>
+          <div class="skill-box">
+            <h3>Design & CAD</h3>
+            <p>Mechanical design, assembly jigs, SolidWorks, 2D CAD, manufacturability improvements, tooling concepts.</p>
+          </div>
+          <div class="skill-box">
+            <h3>Programming & Testing</h3>
+            <p>Python test scripts, sensor testing, G-code, practical debugging, connecting software to real equipment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="eyebrow" style="color: rgba(255,255,255,0.72);">Contact</div>
+            <h2>Interested in manufacturing and automation work.</h2>
+            <p>
+              I’m interested in work that improves how products are assembled, tested, and produced.
+              Reach out if you want to talk about manufacturing engineering, automation, repeatability, or hands-on process improvement.
+            </p>
+          </div>
+          <div class="hero-actions" style="margin-top: 0;">
+            <a class="button" href="mailto:your-email@example.com">Email Me</a>
+            <a class="button" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Engineering Portfolio. Built with HTML and GitHub Pages.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
